@@ -98,35 +98,50 @@ class _PickPageState extends State<PickPage> {
                   ),
                 ],
               ),
-              Btn(
-                onTap: () {
-                  boardService.resetBoard();
-                  boardService.setStart(groupValue);
-                  if (groupValue == 'O') {
-                    boardService.player$.add("X");
-                    boardService.botMove();
-                  }
-                  soundService.playSound('click');
+              Container(
+                height: 50.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    boardService.resetBoard();
+                    boardService.setStart(groupValue);
+                    if (groupValue == 'O') {
+                      boardService.player$.add("X");
+                      boardService.botMove();
+                    }
+                    soundService.playSound('click');
 
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => GamePage(),
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => GamePage(),
+                      ),
+                    );
+                  },
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                  padding: EdgeInsets.all(0.0),
+                  child: Ink(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [MyTheme.orange, MyTheme.red],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(30.0)
                     ),
-                  );
-                },
-                height: 40,
-                width: 250,
-                borderRadius: 200,
-                gradient: [MyTheme.orange, MyTheme.red],
-                child: Text(
-                  "continue".toUpperCase(),
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "continue".toUpperCase(),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16),
+                      ),
+                    ),
+                  ),
                 ),
               ),
+
             ],
           ),
         ),
